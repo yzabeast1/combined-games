@@ -19,6 +19,7 @@ int autosaveTime=1000;
 String[] update;
 String userHome = System.getProperty("user.home");
 boolean updating;
+PImage update1;
 void setup() {
   updating=boolean(loadBytes(userHome+"/Documents/combined/updating.bin")[0]);
   if (updating) {

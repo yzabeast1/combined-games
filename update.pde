@@ -37,6 +37,34 @@ void update() {
   saveStrings("yahtzee.pde", update);
   update=loadStrings("https://raw.githubusercontent.com/yzabeast1/combined-games/main/update.pde");
   saveStrings("update.pde", update);
+  update1=loadImage("https://github.com/yzabeast1/combined-games/blob/main/data/background.png?raw=true");
+  update1.save("data/background.png");
+  update1=loadImage("https://github.com/yzabeast1/combined-games/blob/main/data/bird.png?raw=true");
+  update1.save("data/bird.png");
+  update1=loadImage("https://github.com/yzabeast1/combined-games/blob/main/data/board.png?raw=true");
+  update1.save("data/board.png");
+  update1=loadImage("https://github.com/yzabeast1/combined-games/blob/main/data/bottom.png?raw=true");
+  update1.save("data/bottom.png");
+  update1=loadImage("https://github.com/yzabeast1/combined-games/blob/main/data/dice-1.png?raw=true");
+  update1.save("data/dice-1.png");
+  update1=loadImage("https://github.com/yzabeast1/combined-games/blob/main/data/dice-2.png?raw=true");
+  update1.save("data/dice-2.png");
+  update1=loadImage("https://github.com/yzabeast1/combined-games/blob/main/data/dice-3.png?raw=true");
+  update1.save("data/dice-3.png");
+  update1=loadImage("https://github.com/yzabeast1/combined-games/blob/main/data/dice-4.png?raw=true");
+  update1.save("data/dice-4.png");
+  update1=loadImage("https://github.com/yzabeast1/combined-games/blob/main/data/dice-5.png?raw=true");
+  update1.save("data/dice-5.png");
+  update1=loadImage("https://github.com/yzabeast1/combined-games/blob/main/data/dice-6.png?raw=true");
+  update1.save("data/dice-6.png");
+  update1=loadImage("https://github.com/yzabeast1/combined-games/blob/main/data/locked.png?raw=true");
+  update1.save("data/locked.png");
+  update1=loadImage("https://github.com/yzabeast1/combined-games/blob/main/data/unlocked.png?raw=true");
+  update1.save("data/unlocked.png");
+  update1=loadImage("https://github.com/yzabeast1/combined-games/blob/main/data/pipe%20bottom.png?raw=true");
+  update1.save("data/pipe bottom.png");
+  update1=loadImage("https://github.com/yzabeast1/combined-games/blob/main/data/pipe%20top.png?raw=true");
+  update1.save("data/pipe top.png");
 }
 void update1() {
   update=loadStrings("https://raw.githubusercontent.com/yzabeast1/combined-games/main/update.pde");
