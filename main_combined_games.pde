@@ -18,7 +18,14 @@ int mainTime;
 int autosaveTime=1000;
 String[] update;
 String userHome = System.getProperty("user.home");
+boolean updating;
 void setup() {
+  updating=boolean(loadBytes(userHome+"/Documents/combined/updating.bin")[0]);
+  if (updating) {
+    update();
+    updating=false;
+    exit();
+  }
   reset();
   for (int x=0; x<=2; x++) {
     for (int y=0; y<=2; y++) {
@@ -163,7 +170,8 @@ void mousePressed() {
     gameSelection=false;
   }
   if (mouseX>width/gamesPerRow*3&&mouseX<width/gamesPerRow*4&&mouseY>height/gamesPerColumn&&mouseY<height/gamesPerColumn*2&&gameSelection) {
-    update();
+    update1();
+    updating=true;
     exit();
   }
 }
@@ -318,42 +326,4 @@ void load() {
   msnakehscore=loadBytes(userHome+"/documents/combined/snakehighscore.bin")[1];
   mmsnakehscore=loadBytes(userHome+"/documents/combined/snakehighscore.bin")[2];
   nwsnakehscore=loadBytes(userHome+"/documents/combined/snakehighscore.bin")[3];
-}
-void update() {
-  update=loadStrings("https://raw.githubusercontent.com/yzabeast1/combined-games/main/main_combined_games.pde");
-  saveStrings("main_combined_games.pde", update);
-  update=loadStrings("https://raw.githubusercontent.com/yzabeast1/combined-games/main/FB_flappy_bird.pde");
-  saveStrings("FB_flappy_bird.pde", update);
-  update=loadStrings("https://raw.githubusercontent.com/yzabeast1/combined-games/main/c4_connect_four.pde");
-  saveStrings("c4_connect_four.pde", update);
-  update=loadStrings("https://raw.githubusercontent.com/yzabeast1/combined-games/main/life_game_of_life.pde");
-  saveStrings("life_game_of_life.pde", update);
-  update=loadStrings("https://raw.githubusercontent.com/yzabeast1/combined-games/main/m_game_end.pde");
-  saveStrings("m_game_end.pde", update);
-  update=loadStrings("https://raw.githubusercontent.com/yzabeast1/combined-games/main/m_movingup.pde");
-  saveStrings("m_movingup.pde", update);
-  update=loadStrings("https://raw.githubusercontent.com/yzabeast1/combined-games/main/m_mancala.pde");
-  saveStrings("m_mancala.pde", update);
-  update=loadStrings("https://raw.githubusercontent.com/yzabeast1/combined-games/main/m_movingdown.pde");
-  saveStrings("m_movingdown.pde", update);
-  update=loadStrings("https://raw.githubusercontent.com/yzabeast1/combined-games/main/pente.pde");
-  saveStrings("pente.pde", update);
-  update=loadStrings("https://raw.githubusercontent.com/yzabeast1/combined-games/main/snake.pde");
-  saveStrings("snake.pde", update);
-  update=loadStrings("https://raw.githubusercontent.com/yzabeast1/combined-games/main/snakeMirrorMode.pde");
-  saveStrings("snakeMirrorMode.pde", update);
-  update=loadStrings("https://raw.githubusercontent.com/yzabeast1/combined-games/main/snakeMirrorMovements.pde");
-  saveStrings("snakeMirrorMovements.pde", update);
-  update=loadStrings("https://raw.githubusercontent.com/yzabeast1/combined-games/main/snakeNoWalls.pde");
-  saveStrings("snakeNoWalls.pde", update);
-  update=loadStrings("https://raw.githubusercontent.com/yzabeast1/combined-games/main/snakeNoWallsMirrorMovements.pde");
-  saveStrings("snakeNoWallsMirrorMovements.pde", update);
-  update=loadStrings("https://raw.githubusercontent.com/yzabeast1/combined-games/main/snakeSelection.pde");
-  saveStrings("snakeSelection.pde", update);
-  update=loadStrings("https://raw.githubusercontent.com/yzabeast1/combined-games/main/ttt_pieces.pde");
-  saveStrings("ttt_pieces.pde", update);
-  update=loadStrings("https://raw.githubusercontent.com/yzabeast1/combined-games/main/ttt_tic_tac_toe.pde");
-  saveStrings("ttt_tic_tac_toe.pde", update);
-  update=loadStrings("https://raw.githubusercontent.com/yzabeast1/combined-games/main/yahtzee.pde");
-  saveStrings("yahtzee.pde", update);
 }
