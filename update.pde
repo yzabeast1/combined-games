@@ -67,6 +67,7 @@ void update() {
   update1.save("data/pipe top.png");
 }
 void update1() {
+  backup();
   update=loadStrings("https://raw.githubusercontent.com/yzabeast1/combined-games/main/update.pde");
   saveStrings("update.pde", update);
 }

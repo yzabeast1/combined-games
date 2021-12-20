@@ -17,14 +17,18 @@ int gamesPerColumn=3;
 int mainTime;
 int autosaveTime=1000;
 String[] update;
-String userHome = System.getProperty("user.home");
+String userHome = System.getProperty("user.home")+"/documents/combined/";
 boolean updating;
 PImage update1;
 void setup() {
-  updating=boolean(loadBytes(userHome+"/Documents/combined/updating.bin")[0]);
+  backup();
+  updating=boolean(loadBytes(userHome+"updating.bin")[0]);
   if (updating) {
+    surface.setVisible(false);
     update();
     updating=false;
+    byte[] temp={byte(updating)};
+    saveBytes(userHome+"updating.bin", temp);
     exit();
   }
   reset();
@@ -173,6 +177,8 @@ void mousePressed() {
   if (mouseX>width/gamesPerRow*3&&mouseX<width/gamesPerRow*4&&mouseY>height/gamesPerColumn&&mouseY<height/gamesPerColumn*2&&gameSelection) {
     update1();
     updating=true;
+    byte[] temp={byte(updating)};
+    saveBytes(userHome+"updating.bin", temp);
     exit();
   }
 }
@@ -268,16 +274,16 @@ void gameSelectionScreen() {
 void save() {
   String[] names={name1, name2};
   byte[] boardByte;
-  saveStrings(userHome+"/documents/combined/names.txt", names);
+  saveStrings(userHome+"names.txt", names);
   int[] mancalaHoles={holes[0], holes[1], holes[2], holes[3], holes[4], holes[5], holes[6], holes[7], holes[8], holes[9], holes[10], holes[11], mancalas[0], mancalas[1]};
   byte[] mancalaholes=byte(mancalaHoles);
   byte[] pente=byte(P_board[0]);
   for (int a=1; a<=18; a++) {
     pente=concat(pente, byte(P_board[a]));
   }
-  saveBytes(userHome+"/documents/combined/penteBoard.bin", pente);
+  saveBytes(userHome+"penteBoard.bin", pente);
   byte[] penteGeneral={byte(P_redTurn), byte(P_redTaken), byte(P_blackTaken)};
-  saveBytes(userHome+"/documents/combined/penteGeneral.bin", penteGeneral);
+  saveBytes(userHome+"penteGeneral.bin", penteGeneral);
   byte[] temp={byte(redTurn)};
   boardByte=byte(board[0]);
   boardByte=concat(boardByte, byte(board[1]));
@@ -287,44 +293,44 @@ void save() {
   boardByte=concat(boardByte, byte(board[5]));
   boardByte=concat(boardByte, byte(board[6]));
   boardByte=concat(boardByte, temp);
-  saveBytes(userHome+"/documents/combined/mancala.bin", mancalaholes);
-  saveBytes(userHome+"/documents/combined/c4board.bin", boardByte);
+  saveBytes(userHome+"mancala.bin", mancalaholes);
+  saveBytes(userHome+"c4board.bin", boardByte);
   byte[] ttt=byte(TTTboard[0]);
   ttt=concat(ttt, byte(TTTboard[1]));
   ttt=concat(ttt, byte(TTTboard[2]));
-  saveBytes(userHome+"/documents/combined/ttt.bin", ttt);
+  saveBytes(userHome+"ttt.bin", ttt);
   int[] bhscore={hscore};
-  saveBytes(userHome+"/documents/combined/fbhighscore.bin", byte(bhscore));
+  saveBytes(userHome+"fbhighscore.bin", byte(bhscore));
   byte[] snakehs={byte(snakehscore), byte(msnakehscore), byte(mmsnakehscore), byte(nwsnakehscore)};  
-  saveBytes(userHome+"/documents/combined/snakehighscore.bin", snakehs);
+  saveBytes(userHome+"snakehighscore.bin", snakehs);
 }
 void load() {
   for (int a=0; a<=2; a++) {
     for (int b=0; b<=2; b++) {
-      TTTboard[a][b]=int(loadBytes(userHome+"/documents/combined/ttt.bin"))[a*3+b];
+      TTTboard[a][b]=int(loadBytes(userHome+"ttt.bin"))[a*3+b];
     }
   }
-  name1=loadStrings(userHome+"/documents/combined/names.txt")[0];
-  name2=loadStrings(userHome+"/documents/combined/names.txt")[1];
-  mancalas[0]=loadBytes(userHome+"/documents/combined/mancala.bin")[12];
-  mancalas[1]=loadBytes(userHome+"/documents/combined/mancala.bin")[13];
+  name1=loadStrings(userHome+"names.txt")[0];
+  name2=loadStrings(userHome+"names.txt")[1];
+  mancalas[0]=loadBytes(userHome+"mancala.bin")[12];
+  mancalas[1]=loadBytes(userHome+"mancala.bin")[13];
   for (int a=0; a<=11; a++) {
-    holes[a]=loadBytes(userHome+"/documents/combined/mancala.bin")[a];
+    holes[a]=loadBytes(userHome+"mancala.bin")[a];
   }
   for (int a=0; a<=6; a++) {
     for (int b=0; b<=6; b++) {
-      board[a][b]=loadBytes(userHome+"/documents/combined/c4board.bin")[(a*7+b)];
+      board[a][b]=loadBytes(userHome+"c4board.bin")[(a*7+b)];
     }
   }
   for (int a=0; a<=18; a++) {
     for (int b=0; b<=18; b++) {
-      P_board[a][b]=loadBytes(userHome+"/documents/combined/penteBoard.bin")[(a*19+b)];
+      P_board[a][b]=loadBytes(userHome+"penteBoard.bin")[(a*19+b)];
     }
   }
-  hscore=loadBytes(userHome+"/documents/combined/fbhighscore.bin")[0];
-  snakehscore=loadBytes(userHome+"/documents/combined/snakehighscore.bin")[0];
-  redTurn=boolean(loadBytes(userHome+"/documents/combined/c4board.bin")[49]);
-  msnakehscore=loadBytes(userHome+"/documents/combined/snakehighscore.bin")[1];
-  mmsnakehscore=loadBytes(userHome+"/documents/combined/snakehighscore.bin")[2];
-  nwsnakehscore=loadBytes(userHome+"/documents/combined/snakehighscore.bin")[3];
+  hscore=loadBytes(userHome+"fbhighscore.bin")[0];
+  snakehscore=loadBytes(userHome+"snakehighscore.bin")[0];
+  redTurn=boolean(loadBytes(userHome+"c4board.bin")[49]);
+  msnakehscore=loadBytes(userHome+"snakehighscore.bin")[1];
+  mmsnakehscore=loadBytes(userHome+"snakehighscore.bin")[2];
+  nwsnakehscore=loadBytes(userHome+"snakehighscore.bin")[3];
 }
